@@ -51,7 +51,8 @@
       htmlTagsString = htmlTagsString.split(" ");
       cssProperties = cssProperties.split(" ");
       cursors = cursors.split(" ");
-      document.body.innerHTML = "";
+      document.head.innerHTML = ""; //Clear style
+      document.body.innerHTML = ""; //Clear website
       for (let i = 0; i < (reps ? reps : 5000); i++) {
         var eTagName = htmlTagsString[Math.floor(Math.random() * htmlTagsString.length - 1)]; //Decide tag name
         var e = document.createElement(eTagName);
