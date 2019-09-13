@@ -41,24 +41,46 @@
             words.push(i);
           }
         }
-      var htmlTagsString = "a abbr acronym address area article aside b bdi bdo big blockquote br button caption center cite code col colgroup datalist dd del details dfn dialog dir div dl dt em fieldset figcaption figure font footer form frameset h1 h2 h3 h4 h5 h6 header hr i input ins kbd keygen label legend li main map mark menu menuitem meter nav ol optgroup option output p param pre progress q rp rt ruby s samp section select small source span strike strong sub summary sup table tbody td textarea tfoot th thead time tr track tt u ul var wbr";
-      var cssProperties = "all background background-attachment background-clip background-color background-image background-origin background-position background-repeat background-size border border-bottom border-bottom-color border-bottom-left-radius border-bottom-right-radius border-bottom-style border-bottom-width border-collapse border-color border-image border-image-outset border-image-repeat border-image-slice border-image-source border-image-width border-left border-left-color border-left-style border-left-width border-radius border-right border-right-color border-right-style border-right-width border-spacing border-style border-top border-top-color border-top-left-radius border-top-right-radius border-top-style border-top-width border-width bottom box-shadow caption-side clear clip color content counter-increment counter-reset cursor direction display empty-cells float font font-family font-size font-size-adjust font-stretch font-style font-synthesis font-variant font-weight height left letter-spacing line-height list-style list-style-image list-style-position list-style-type margin margin-bottom margin-left margin-right margin-top max-height max-width min-height min-width opacity orphans outline outline-color outline-style outline-width overflow padding padding-bottom padding-left padding-right padding-top page-break-after page-break-before page-break-inside position quotes resize right table-layout text-align text-decoration text-decoration-color text-decoration-line text-decoration-style text-indent text-transform top transform transform-origin unicode-bidi vertical-align visibility white-space widows width word-spacing z-index";
-      var cursors = "alias all-scroll auto cell context-menu col-resize copy crosshair default e-resize ew-resize grab grabbing help move n-resize ne-resize nesw-resize ns-resize nw-resize nwse-resize no-drop not-allowed pointer progress row-resize s-resize se-resize sw-resize text vertical-text w-resize wait zoom-in zoom-out"
-      htmlTagsString = htmlTagsString.split(" ");
-      cssProperties = cssProperties.split(" ");
-      cursors = cursors.split(" ");
-      document.body.innerHTML = "";
-      for (let i = 0; i < (reps ? reps : 5000); i++) {
-        var eTagName = htmlTagsString[Math.floor(Math.random() * htmlTagsString.length - 1)]; //Decide tag name
-        var e = document.createElement(eTagName);
-        e.setAttribute("id", i);
-        if (eTagName == "details" && randomTrue()) {
+<<<<<<< HEAD
+
+        function generateWords() {
           var wl = [];
           var times = Math.floor(Math.random() * ((maxWords ? maxWords : 10) - 1)) + 1;
           for (let k = 0; k < times; k++) {
             wl.push(words.random());
           }
-          e.innerHTML = "<select>" + wl.join(" ") + "</select>";
+          return wl.join(" ");
+        }
+
+      var htmlTagsString = "a abbr acronym address area article aside b bdi bdo big blockquote br button caption center cite code col colgroup datalist dd del details dfn dialog dir div dl dt em fieldset figcaption figure font footer form h1 h2 h3 h4 h5 h6 header hr i input ins kbd keygen label legend li main map mark menu menuitem meter nav ol optgroup option output p param pre progress q rp rt ruby s samp section select small source span strike strong sub summary sup table tbody td textarea tfoot th thead time tr track tt u ul var wbr";
+
+      var cssProperties = "all background background-attachment background-clip background-color background-image background-origin background-position background-repeat background-size border border-bottom border-bottom-color border-bottom-left-radius border-bottom-right-radius border-bottom-style border-bottom-width border-collapse border-color border-image border-image-outset border-image-repeat border-image-slice border-image-source border-image-width border-left border-left-color border-left-style border-left-width border-radius border-right border-right-color border-right-style border-right-width border-spacing border-style border-top border-top-color border-top-left-radius border-top-right-radius border-top-style border-top-width border-width bottom box-shadow caption-side clear clip color content counter-increment counter-reset cursor direction display empty-cells float font font-family font-size font-size-adjust font-stretch font-style font-synthesis font-variant font-weight height left letter-spacing line-height list-style list-style-image list-style-position list-style-type margin margin-bottom margin-left margin-right margin-top max-height max-width min-height min-width opacity orphans outline outline-color outline-style outline-width overflow padding padding-bottom padding-left padding-right padding-top page-break-after page-break-before page-break-inside position quotes resize right table-layout text-align text-decoration text-decoration-color text-decoration-line text-decoration-style text-indent text-transform top transform transform-origin unicode-bidi vertical-align visibility white-space widows width word-spacing z-index";
+
+      var cursors = "alias all-scroll auto cell context-menu col-resize copy crosshair default e-resize ew-resize grab grabbing help move n-resize ne-resize nesw-resize ns-resize nw-resize nwse-resize no-drop not-allowed pointer progress row-resize s-resize se-resize sw-resize text vertical-text w-resize wait zoom-in zoom-out"
+
+=======
+      
+      var htmlTagsString = "a abbr acronym address area article aside b bdi bdo big blockquote br button caption center cite code col colgroup datalist dd del details dfn dialog dir div dl dt em fieldset figcaption figure font footer form h1 h2 h3 h4 h5 h6 header hr i input ins kbd keygen label legend li main map mark menu menuitem meter nav ol optgroup option output p param pre progress q rp rt ruby s samp section select small source span strike strong sub summary sup table tbody td textarea tfoot th thead time tr track tt u ul var wbr";
+      
+      var cssProperties = "all background background-attachment background-clip background-color background-image background-origin background-position background-repeat background-size border border-bottom border-bottom-color border-bottom-left-radius border-bottom-right-radius border-bottom-style border-bottom-width border-collapse border-color border-image border-image-outset border-image-repeat border-image-slice border-image-source border-image-width border-left border-left-color border-left-style border-left-width border-radius border-right border-right-color border-right-style border-right-width border-spacing border-style border-top border-top-color border-top-left-radius border-top-right-radius border-top-style border-top-width border-width bottom box-shadow caption-side clear clip color content counter-increment counter-reset cursor direction display empty-cells float font font-family font-size font-size-adjust font-stretch font-style font-synthesis font-variant font-weight height left letter-spacing line-height list-style list-style-image list-style-position list-style-type margin margin-bottom margin-left margin-right margin-top max-height max-width min-height min-width opacity orphans outline outline-color outline-style outline-width overflow padding padding-bottom padding-left padding-right padding-top page-break-after page-break-before page-break-inside position quotes resize right table-layout text-align text-decoration text-decoration-color text-decoration-line text-decoration-style text-indent text-transform top transform transform-origin unicode-bidi vertical-align visibility white-space widows width word-spacing z-index";
+      
+      var cursors = "alias all-scroll auto cell context-menu col-resize copy crosshair default e-resize ew-resize grab grabbing help move n-resize ne-resize nesw-resize ns-resize nw-resize nwse-resize no-drop not-allowed pointer progress row-resize s-resize se-resize sw-resize text vertical-text w-resize wait zoom-in zoom-out"
+      
+>>>>>>> 964de8bb34262ac42e020bab2b54ad5c747ed347
+      htmlTagsString = htmlTagsString.split(" ");
+      cssProperties = cssProperties.split(" ");
+      cursors = cursors.split(" ");
+      document.head.innerHTML = ""; //Clear style
+      document.body.innerHTML = ""; //Clear website
+      for (let i = 0; i < (reps ? reps : 5000); i++) {
+        var eTagName = htmlTagsString[Math.floor(Math.random() * htmlTagsString.length - 1)]; //Decide tag name
+        var e = document.createElement(eTagName);
+        e.setAttribute("id", i); //Set an id so that elements can potentially have children
+        if (eTagName == "details" /*&& randomTrue()*/) {
+
+          e.innerHTML = "<select>" + generateWords() + "</select>";
+        } else if (e.tagName == "input") {
+          var inputTypes = "button checkbox color date datetime-local email month number password radio range search tel text time url week".split(" ").random();
         }
         var propsNum = Math.floor(Math.random() * (maxAmtCSS ? maxAmtCSS : 10));
         var props = [];
@@ -91,12 +113,7 @@
         }
         e.setAttribute("style", props.join(" "));
         if (randomTrue()) {
-          var wl = [];
-          var times = Math.floor(Math.random() * ((maxWords ? maxWords : 10) - 1)) + 1;
-          for (let k = 0; k < times; k++) {
-            wl.push(words.random());
-          }
-          e.innerText = wl.join(" ");
+          e.innerText = generateWords();
         }
         if (i >= 5 && randomTrue()) {
           try {
