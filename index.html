@@ -1,0 +1,70 @@
+<html>
+<head>
+  <title>Random Chaotic Website Generator</title>
+  <style>
+  #generateSite {
+    background-color: #00adff;
+    color: white;
+    padding: 5px;
+    width: fit-content;
+    user-select: none;
+    font-family: Arial;
+    border-radius: 5px;
+    font-size: 18px;
+  }
+  #generateSite:focus {
+    background-color: #125777;
+  }
+  #c {
+    border-style: double;
+    width: 100%;
+    height: 100%;
+  }
+  </style>
+</head>
+<body>
+  <h1>Random Chaotic Website Generator!</h1>
+  <details>
+    <summary>Options</summary>
+    <fieldset>
+      <label>Number of elements (default 1000)</label>
+      <input id="reps" type="number" value="1000">
+      <br>
+      <label>Maximum amount of CSS properties per element (default 10)</label>
+      <input id="maxCSS" type="number" value="10">
+      <br>
+      <label>Maximum size in pixels per element (default 5000)</label>
+      <input id="maxSize" type="number" value="5000">
+      <br>
+      <label>Maximum amount of words per element (default 10)</label>
+      <input id="maxWords" type="number" value="10">
+      <br>
+      <label>User-defined words (split each word with comma)</label>
+      <input id="udWords" type="text" placeholder="ex: foo,bar"></input>
+      <br>
+      <a href="https://github.com/paritytech/wordlist/blob/master/res/wordlist.txt">List of words already included</a>
+      <details>
+        <summary>Advanced options</summary>
+        <label>Custom CSS</label>
+        <br>
+        <textarea id="customCSS"></textarea>
+        <br>
+      </details>
+    </fieldset>
+  </details>
+  <button id="generateSite">Generate!</button>
+  <iframe id="c" src="chaos.html"></iframe>
+  <script>
+  document.getElementById("generateSite").addEventListener("click", function() {
+    let reps = parseInt(document.getElementById("reps").value, 10);
+    let maxCSS = parseInt(document.getElementById("maxCSS").value, 10);
+    let maxSize = parseInt(document.getElementById("maxSize").value, 10);
+    let maxWords = parseInt(document.getElementById("maxWords").value, 10);
+    let udWords = document.getElementById("udWords").value.split(",");
+    let customCSS = document.getElementById("customCSS").value;
+    document.getElementById("c").contentWindow.generateChaos(reps, maxCSS, maxSize, maxWords, customCSS, udWords);
+    //console.log([reps, maxCSS, maxSize, maxWords, customCSS, udWords]);
+  });
+  </script>
+</body>
+</html>

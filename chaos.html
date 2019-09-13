@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="words.js"></script>
+  </head>
+  <body>
+      <script>
+      function randomTrue() {
+        if (Math.floor(Math.random() * 99) + 1 > 50) {
+          return true;
+        }
+        return false;
+      }
+      function randomColor() {
+        return Math.floor(Math.random() * 255);
+      }
+      Array.prototype.random = function() {
+        return this[Math.floor(Math.random() * this.length)];
+      }
+      window.generateChaos = function(reps, maxAmtCSS, maxSize, maxWords, customCSS, userDefWords) {
+        /*
+        reps: Amount of elements in the page (default 1000)
+        maxAmtCSS: Maximum amount of CSS properties per element (default 10)
+        maxSize: Maximum size that any element can be (default 5000)
+        maxWords: Maximum amount of words per element (default 10)
+        customCSS: User defined CSS
+        userDefWords: User-defined words split by commas
+        */
+
+        //Add custom CSS
+        if (customCSS != "") {
+          var styles = document.createElement("style");
+          styles.innerHTML = customCSS ? customCSS : "";
+          document.head.appendChild(styles);
+        }
+
+        //Add user-defined words
+        if (userDefWords != [""]) {
+          var udWordTemp = userDefWords.split(",");
+          for (let i of udWordTemp) {
+            words.push(i);
+          }
+        }
+      var htmlTagsString = "a abbr acronym address area article aside b base basefont bdi bdo big blockquote br button caption center cite code col colgroup datalist dd del details dfn dialog dir div dl dt em fieldset figcaption figure font footer form frameset h1 h2 h3 h4 h5 h6 header hr i input ins kbd keygen label legend li main map mark menu menuitem meter nav ol optgroup option output p param pre progress q rp rt ruby s samp section select small source span strike strong style sub summary sup table tbody td textarea tfoot th thead time tr track tt u ul var wbr";
+      var cssProperties = "all background background-attachment background-clip background-color background-image background-origin background-position background-repeat background-size border border-bottom border-bottom-color border-bottom-left-radius border-bottom-right-radius border-bottom-style border-bottom-width border-collapse border-color border-image border-image-outset border-image-repeat border-image-slice border-image-source border-image-width border-left border-left-color border-left-style border-left-width border-radius border-right border-right-color border-right-style border-right-width border-spacing border-style border-top border-top-color border-top-left-radius border-top-right-radius border-top-style border-top-width border-width bottom box-shadow caption-side clear clip color content counter-increment counter-reset cursor direction display empty-cells float font font-family font-size font-size-adjust font-stretch font-style font-synthesis font-variant font-weight height left letter-spacing line-height list-style list-style-image list-style-position list-style-type margin margin-bottom margin-left margin-right margin-top max-height max-width min-height min-width opacity orphans outline outline-color outline-style outline-width overflow padding padding-bottom padding-left padding-right padding-top page-break-after page-break-before page-break-inside position quotes right table-layout text-align text-decoration text-decoration-color text-decoration-line text-decoration-style text-indent text-transform top transform transform-origin transition transition-delay transition-duration transition-property transition-timing-function unicode-bidi vertical-align visibility white-space widows width word-spacing z-index";
+      htmlTagsString = htmlTagsString.split(" ");
+      cssProperties = cssProperties.split(" ");
+      for (let i = 0; i < (reps ? reps : 1000); i++) {
+        var e = document.createElement(htmlTagsString[Math.floor(Math.random() * htmlTagsString.length - 1)]); //Decide tag name
+        e.setAttribute("id", i);
+        var propsNum = Math.floor(Math.random() * (maxAmtCSS ? maxAmtCSS : 10));
+        var props = [];
+        for (let j = 0; j < propsNum; j++) { //CSS properties
+          var propName = cssProperties.random();
+          var propComps = propName.split("-");
+          var propCore;
+          if (propComps[propComps.length - 1] == "color") {
+            propCore = `rgb(${randomColor()}, ${randomColor()}, ${randomColor()})`;
+          } else if (propComps[propComps.length - 1] == "font") {
+            propCore = ["Arial", "Courier New", "Comic Sans", "Georgia", "Helvetica", "Times", "Verdana", "Tahoma", "sans-serif", "serif", "monospace"].random();
+          } else if (["width", "height", "size", "left", "right", "top", "bottom", "spacing"].includes(propComps[propComps.length - 1])) {
+            propCore = Math.floor(Math.random() * (maxSize ? maxSize : 5000)) + "px";
+          } else if (propComps[propComps.length - 1] == "style") {
+            propCore = "auto";
+          } else if (propComps[propComps.length - 1] == "style" && propComps[0] == border) {
+            propCore = ["solid", "double", "dashed", "dotted", "groove", "ridge", "inset", "outset"].random();
+          } else {
+              propCore = Math.floor(Math.random() * 5000);
+          }
+          props.push(propName + ": " + propCore + ";");
+        }
+        e.setAttribute("style", props.join(" "));
+        if (randomTrue()) {
+          var wl = [];
+          var times = Math.floor(Math.random() * ((maxWords ? maxWords : 10) - 1)) + 1;
+          for (let k = 0; k < times; k++) {
+            wl.push(words.random());
+          }
+          e.innerText = wl.join(" ");
+        }
+        if (i >= 5 && randomTrue()) {
+          try {
+          var pe = document.getElementById(Math.floor(Math.random() * i) - 1);
+          pe.appendChild(e);
+          } catch (err) {
+              document.body.appendChild(e);
+          }
+        } else {
+          document.body.appendChild(e);
+        }
+      }
+    }
+    </script>
+  </body>
+</html>
