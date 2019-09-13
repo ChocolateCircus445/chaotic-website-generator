@@ -19,9 +19,9 @@
       }
       window.generateChaos = function(reps, maxAmtCSS, maxSize, maxWords, customCSS, userDefWords) {
         /*
-        reps: Amount of elements in the page (default 1000)
+        reps: Amount of elements in the page (default 5000)
         maxAmtCSS: Maximum amount of CSS properties per element (default 10)
-        maxSize: Maximum size that any element can be (default 5000)
+        maxSize: Maximum size that any element can be (default 200)
         maxWords: Maximum amount of words per element (default 10)
         customCSS: User defined CSS
         userDefWords: User-defined words split by commas
@@ -41,13 +41,25 @@
             words.push(i);
           }
         }
-      var htmlTagsString = "a abbr acronym address area article aside b base basefont bdi bdo big blockquote br button caption center cite code col colgroup datalist dd del details dfn dialog dir div dl dt em fieldset figcaption figure font footer form frameset h1 h2 h3 h4 h5 h6 header hr i input ins kbd keygen label legend li main map mark menu menuitem meter nav ol optgroup option output p param pre progress q rp rt ruby s samp section select small source span strike strong style sub summary sup table tbody td textarea tfoot th thead time tr track tt u ul var wbr";
-      var cssProperties = "all background background-attachment background-clip background-color background-image background-origin background-position background-repeat background-size border border-bottom border-bottom-color border-bottom-left-radius border-bottom-right-radius border-bottom-style border-bottom-width border-collapse border-color border-image border-image-outset border-image-repeat border-image-slice border-image-source border-image-width border-left border-left-color border-left-style border-left-width border-radius border-right border-right-color border-right-style border-right-width border-spacing border-style border-top border-top-color border-top-left-radius border-top-right-radius border-top-style border-top-width border-width bottom box-shadow caption-side clear clip color content counter-increment counter-reset cursor direction display empty-cells float font font-family font-size font-size-adjust font-stretch font-style font-synthesis font-variant font-weight height left letter-spacing line-height list-style list-style-image list-style-position list-style-type margin margin-bottom margin-left margin-right margin-top max-height max-width min-height min-width opacity orphans outline outline-color outline-style outline-width overflow padding padding-bottom padding-left padding-right padding-top page-break-after page-break-before page-break-inside position quotes right table-layout text-align text-decoration text-decoration-color text-decoration-line text-decoration-style text-indent text-transform top transform transform-origin transition transition-delay transition-duration transition-property transition-timing-function unicode-bidi vertical-align visibility white-space widows width word-spacing z-index";
+      var htmlTagsString = "a abbr acronym address area article aside b bdi bdo big blockquote br button caption center cite code col colgroup datalist dd del details dfn dialog dir div dl dt em fieldset figcaption figure font footer form frameset h1 h2 h3 h4 h5 h6 header hr i input ins kbd keygen label legend li main map mark menu menuitem meter nav ol optgroup option output p param pre progress q rp rt ruby s samp section select small source span strike strong sub summary sup table tbody td textarea tfoot th thead time tr track tt u ul var wbr";
+      var cssProperties = "all background background-attachment background-clip background-color background-image background-origin background-position background-repeat background-size border border-bottom border-bottom-color border-bottom-left-radius border-bottom-right-radius border-bottom-style border-bottom-width border-collapse border-color border-image border-image-outset border-image-repeat border-image-slice border-image-source border-image-width border-left border-left-color border-left-style border-left-width border-radius border-right border-right-color border-right-style border-right-width border-spacing border-style border-top border-top-color border-top-left-radius border-top-right-radius border-top-style border-top-width border-width bottom box-shadow caption-side clear clip color content counter-increment counter-reset cursor direction display empty-cells float font font-family font-size font-size-adjust font-stretch font-style font-synthesis font-variant font-weight height left letter-spacing line-height list-style list-style-image list-style-position list-style-type margin margin-bottom margin-left margin-right margin-top max-height max-width min-height min-width opacity orphans outline outline-color outline-style outline-width overflow padding padding-bottom padding-left padding-right padding-top page-break-after page-break-before page-break-inside position quotes resize right table-layout text-align text-decoration text-decoration-color text-decoration-line text-decoration-style text-indent text-transform top transform transform-origin unicode-bidi vertical-align visibility white-space widows width word-spacing z-index";
+      var cursors = "alias all-scroll auto cell context-menu col-resize copy crosshair default e-resize ew-resize grab grabbing help move n-resize ne-resize nesw-resize ns-resize nw-resize nwse-resize no-drop not-allowed pointer progress row-resize s-resize se-resize sw-resize text vertical-text w-resize wait zoom-in zoom-out"
       htmlTagsString = htmlTagsString.split(" ");
       cssProperties = cssProperties.split(" ");
-      for (let i = 0; i < (reps ? reps : 1000); i++) {
-        var e = document.createElement(htmlTagsString[Math.floor(Math.random() * htmlTagsString.length - 1)]); //Decide tag name
+      cursors = cursors.split(" ");
+      document.body.innerHTML = "";
+      for (let i = 0; i < (reps ? reps : 5000); i++) {
+        var eTagName = htmlTagsString[Math.floor(Math.random() * htmlTagsString.length - 1)]; //Decide tag name
+        var e = document.createElement(eTagName);
         e.setAttribute("id", i);
+        if (eTagName == "details" && randomTrue()) {
+          var wl = [];
+          var times = Math.floor(Math.random() * ((maxWords ? maxWords : 10) - 1)) + 1;
+          for (let k = 0; k < times; k++) {
+            wl.push(words.random());
+          }
+          e.innerHTML = "<select>" + wl.join(" ") + "</select>";
+        }
         var propsNum = Math.floor(Math.random() * (maxAmtCSS ? maxAmtCSS : 10));
         var props = [];
         for (let j = 0; j < propsNum; j++) { //CSS properties
@@ -59,13 +71,21 @@
           } else if (propComps[propComps.length - 1] == "font") {
             propCore = ["Arial", "Courier New", "Comic Sans", "Georgia", "Helvetica", "Times", "Verdana", "Tahoma", "sans-serif", "serif", "monospace"].random();
           } else if (["width", "height", "size", "left", "right", "top", "bottom", "spacing"].includes(propComps[propComps.length - 1])) {
-            propCore = Math.floor(Math.random() * (maxSize ? maxSize : 5000)) + "px";
+            propCore = Math.floor(Math.random() * (maxSize ? maxSize : 200)) + "px";
           } else if (propComps[propComps.length - 1] == "style") {
             propCore = "auto";
           } else if (propComps[propComps.length - 1] == "style" && propComps[0] == border) {
             propCore = ["solid", "double", "dashed", "dotted", "groove", "ridge", "inset", "outset"].random();
+          } else if (propComps[propComps.length - 1] == "cursor") {
+            propCore = cursors.random();
+          } else if (propComps.join("-") == "text-transform") {
+            propCore = ["capitalize", "uppercase", "lowercase"].random();
+          } else if (propComps[propComps.length - 1] == "direction") {
+            propCore = ["ltr", "rtl"].random();
+          } else if (propComps[propComps.length - 1] == "resize") {
+            propCore = ["both", "horizontal", "vertical"].random();
           } else {
-              propCore = Math.floor(Math.random() * 5000);
+              propCore = Math.floor(Math.random() * (maxSize ? maxSize : 200));
           }
           props.push(propName + ": " + propCore + ";");
         }
