@@ -60,7 +60,7 @@
     let maxCSS = parseInt(document.getElementById("maxCSS").value, 10);
     let maxSize = parseInt(document.getElementById("maxSize").value, 10);
     let maxWords = parseInt(document.getElementById("maxWords").value, 10);
-    let udWords = document.getElementById("udWords").value.split(",");
+    let udWords = document.getElementById("udWords").value;
     let customCSS = document.getElementById("customCSS").value;
     document.getElementById("c").contentWindow.generateChaos(reps, maxCSS, maxSize, maxWords, customCSS, udWords);
     //console.log([reps, maxCSS, maxSize, maxWords, customCSS, udWords]);
