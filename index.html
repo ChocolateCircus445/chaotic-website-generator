@@ -25,6 +25,8 @@
 </head>
 <body>
   <h1>Random Chaotic Website Generator!</h1>
+  <br>
+  <span id="version"></span>
   <details>
     <summary>Options</summary>
     <fieldset>
@@ -57,6 +59,8 @@
   <br>
   <iframe id="c" src="chaos.html"></iframe>
   <script>
+  var versionNo = "1.0";
+  document.getElementById('version').innerText = "v" + versionNo;
   document.getElementById("generateSite").addEventListener("click", function() {
     let reps = parseInt(document.getElementById("reps").value, 10);
     let maxCSS = parseInt(document.getElementById("maxCSS").value, 10);
