@@ -67,10 +67,12 @@
         var e = document.createElement(eTagName);
         e.setAttribute("id", i); //Set an id so that elements can potentially have children
         if (eTagName == "details" /*&& randomTrue()*/) {
-
-          e.innerHTML = "<select>" + generateWords() + "</select>";
+          var slc = document.createElement("select");
+          slc.innerText = generateWords();
+          e.appendChild(slc);
         } else if (e.tagName == "input") {
           var inputTypes = "button checkbox color date datetime-local email month number password radio range search tel text time url week".split(" ").random();
+          e.setAttribute("type", inputTypes);
         }
         var propsNum = Math.floor(Math.random() * (maxAmtCSS ? maxAmtCSS : 10));
         var props = [];
